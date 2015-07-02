@@ -64,7 +64,7 @@
 					<c:forEach var="product" items="${proList}">
 						<tr>
 							<td><c:out value="${product.productId}" /></td>
-							<td><a href="Order?pid=<c:out value="${product.productId}" />"><c:out value="${product.productName}" /></a></td>
+							<td><a href="Orders?pid=<c:out value="${product.productId}" />"><c:out value="${product.productName}" /></a></td>
 							<td><c:out value="${product.productUnitprice}" /></td>
 						</tr>
 					</c:forEach>

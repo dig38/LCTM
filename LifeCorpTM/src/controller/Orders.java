@@ -15,14 +15,14 @@ import modelcontroller.productMC;
 /**
  * SERVLET implementation class Order
  */
-@WebServlet("/Order")
-public class Order extends HttpServlet {
+@WebServlet("/Orders")
+public class Orders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Order() {
+    public Orders() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,17 +39,22 @@ public class Order extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		//System.out.println(request.getParameter("pid"));
-		
-		int x = 1;
-		
-		if(x == 1){
-			Product pro = productMC.getOneProduct(request.getParameter("pid").toString());
-			session.setAttribute("pro", pro);
+		try{
+			if((boolean)session.getAttribute("log") == true){
+				Product pro = productMC.getOneProduct(request.getParameter("pid").toString());
+				session.setAttribute("pro", pro);
+
+				getServletContext().getRequestDispatcher("/order.jsp").forward(request, response);
+			}else
+				session.setAttribute("loc", "order");
+				
+				getServletContext().getRequestDispatcher("/logon.jsp").forward(request, response);
+		}catch (NullPointerException e){
+			session.setAttribute("loc", "order");
 			
-			getServletContext().getRequestDispatcher("/order.jsp").forward(request, response);
-		}else
 			getServletContext().getRequestDispatcher("/logon.jsp").forward(request, response);
+		}
+		
 	}
 
 }

@@ -28,12 +28,7 @@ public class productMC {
 		Product Product = null;
 		String queryString = "SELECT P FROM Product P WHERE P.productId = :proId ";
 		TypedQuery<Product> typeQue = em.createQuery(queryString, Product.class);
-		
-		/*
-		Long tempLong = Long.parseLong(proId);
-		typeQue.setParameter("proId", tempLong.longValue());
-		*/
-		
+				
 		typeQue.setParameter("proId", proId);
 		
 		try{

@@ -2,11 +2,14 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpSession;
+
 import model.Product;
 import modelcontroller.productMC;
 /**
@@ -37,7 +40,7 @@ public class ProductList extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Product> proList = productMC.getAllProducts();
 		request.setAttribute("proList", proList);
-		
+		//HttpSession session = request.getSession();
 		/*//Prints a list of our product's names to the console.
 		for (Product iterater : proList){
 			System.out.println(iterater.getProductName());

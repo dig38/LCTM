@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
@@ -24,6 +25,10 @@ public class Product implements Serializable {
 
 	@Column(name="PRODUCT_UNITPRICE")
 	private BigDecimal productUnitprice;
+
+	//bi-directional many-to-one association to Order
+	@OneToMany(mappedBy="product")
+	private List<Order> orders;
 
 	public Product() {
 	}
@@ -50,6 +55,28 @@ public class Product implements Serializable {
 
 	public void setProductUnitprice(BigDecimal productUnitprice) {
 		this.productUnitprice = productUnitprice;
+	}
+
+	public List<Order> getOrders() {
+		return this.orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public Order addOrder(Order order) {
+		getOrders().add(order);
+		order.setProduct(this);
+
+		return order;
+	}
+
+	public Order removeOrder(Order order) {
+		getOrders().remove(order);
+		order.setProduct(null);
+
+		return order;
 	}
 
 }

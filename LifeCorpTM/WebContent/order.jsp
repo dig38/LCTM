@@ -73,15 +73,17 @@
 			</div><!-- .col-md-12 -->
 		</div><!-- .row -->
 		
+		<h3>Please, select how many units of <c:out value="${pro.productName}" /> you would like to purchase.</h3>
+		
 		<div class="row">
-			<form class="form-horizontal" action="Logon" method="post">
+			<form class="form-horizontal" action="ProcessOrder" method="post">
 				<div class="form-group">
 					<label for="quantity" class="col-sm-3 control-label">Quantity</label>
 					<div class="input-group spinner col-sm-3">
 						<input type="number" class="form-control" id="quantity" placeholder="Quantity" min="0" value="0">
 						<div class="btn-group-vertical input-group-btn-vertical ">
-							<button class="btn btn-default" type="button">&#8593;</button>
-							<button class="btn btn-default" type="button">&#8595;</button>
+							<button class="btn btn-default" type="button">+</button>
+							<button class="btn btn-default" type="button">-</button>
 						</div>
 					</div>			
 				</div>		

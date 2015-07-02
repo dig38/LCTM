@@ -36,17 +36,20 @@
 		</div>
 	</div>
 	<div class="container">
+		<c:if test="${message != null}">
+			<div class='alert alert-danger' role='alert'><c:out value="${message}" /></div>
+		</c:if>
 		<form class="form-horizontal col-sm-offset-0" action="Logon" method="post">
 			<div class="form-group">
 				<label for="email" class="col-sm-3 control-label">Email</label>
 				<div class="col-sm-5">
-					<input type="email" class="form-control" id="email" placeholder="Email" />
+					<input type="email" class="form-control" name="email" id="email" placeholder="Email" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="password" class="col-sm-3 control-label">Password</label>
 				<div class="col-sm-5">
-					<input type="password" class="form-control" id="password" placeholder="Password" />
+					<input type="password" class="form-control" name="password" id="password" placeholder="Password" />
 				</div>
 			</div>
 			<div class="form-group">
