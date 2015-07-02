@@ -51,6 +51,7 @@ public class ProcessOrder extends HttpServlet {
 			o.setOrderTotal(qty.multiply(p.getProductUnitprice()));
 			o.setProduct((Product)session.getAttribute("pro"));
 			OrderMC.insert(o);
+			session.setAttribute("ord", o);
 			getServletContext().getRequestDispatcher("/orderprocessed.jsp").forward(request, response);
 		}catch (Exception e){
 			System.out.println("Error: "+e+" !!!!!!!!!!!!!!!!");
