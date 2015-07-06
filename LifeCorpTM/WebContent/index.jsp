@@ -23,7 +23,7 @@
 			<div class="col-md-6">
 				<h2>New Customers Here: </h2>
 				<p>Register Here! </p>
-				<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+				<p><a class="btn btn-default" href="register.jsp" role="button">View details &raquo;</a></p>
 			</div>
 			<div class="col-md-6">
 				<h2>Returning Customers: </h2>
