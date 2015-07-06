@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import model.Order;
 import model.Product;
@@ -38,7 +37,6 @@ public class OrderMC {
 			trans.begin();
 			em.persist(ord);
 			em.flush();
-			System.out.println(ord.getOrderId());
 			trans.commit();
 		}catch(Exception e){
 			System.out.println(e);
