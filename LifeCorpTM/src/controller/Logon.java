@@ -47,12 +47,12 @@ public class Logon extends HttpServlet {
 			if( areTheyACustomer(c) == true ){
 				session.setAttribute("cus", c);
 				if(loc != null)
-					getServletContext().getRequestDispatcher("/" + loc.toString() + ".jsp").forward(request, response);
+					getServletContext().getRequestDispatcher(loc.toString()).forward(request, response);
 				else
 					getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 		}catch (Exception e){
-			System.out.println(e);
+			//System.out.println(e);
 			request.setAttribute("message", "Your Email/Password combination is incorect.");
 			getServletContext().getRequestDispatcher("/logon.jsp").forward(request, response);
 		}

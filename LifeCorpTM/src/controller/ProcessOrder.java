@@ -16,7 +16,7 @@ import model.Product;
 import modelcontroller.OrderMC;
 
 /**
- * Servlet implementation class ProcessOrder
+ * SERVLET implementation class ProcessOrder
  */
 @WebServlet("/ProcessOrder")
 public class ProcessOrder extends HttpServlet {
@@ -45,14 +45,15 @@ public class ProcessOrder extends HttpServlet {
 		BigDecimal qty = new BigDecimal(request.getParameter("quantity"));
 		Product p = (Product)session.getAttribute("pro");
 		try{
-			Order o = new Order();
-			o.setCustomer((Customer)session.getAttribute("cus"));
-			o.setOrderQuantity(qty);
-			o.setOrderTotal(qty.multiply(p.getProductUnitprice()));
-			o.setProduct((Product)session.getAttribute("pro"));
-			OrderMC.insert(o);
-			session.setAttribute("ord", o);
-			getServletContext().getRequestDispatcher("/orderprocessed.jsp").forward(request, response);
+			Order ord = new Order();
+			ord.setCustomer((Customer)session.getAttribute("cus"));
+			ord.setOrderQuantity(qty);
+			ord.setOrderTotal(qty.multiply(p.getProductUnitprice()));
+			ord.setProduct((Product)session.getAttribute("pro"));
+			OrderMC.insert(ord);
+			//OrderMC.getOne();
+			session.setAttribute("ord", ord);
+			getServletContext().getRequestDispatcher("/orderconfirmation.jsp").forward(request, response);
 		}catch (Exception e){
 			System.out.println("Error: "+e+" !!!!!!!!!!!!!!!!");
 			//sorry

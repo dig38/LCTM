@@ -9,30 +9,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
 </head>
 <body>
-	<header id="header">
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">LifeCorp TM</a>
-				</div>
-			</div>
-		</nav>
-		<br />
-		<br />
-		<br />
-		<br />
-	</header>
+	<c:import url="/WEB-INF/inserts/header.jsp" />
 	<div class="jumbotron">
 		<div class="container">
 			<h1>LifeCorp</h1>
 			<p>Welcome to LifeCorp. This is LifeCorp. Anything is possible, at LifeCorp. The only limit is yourself.</p>			
-			<p>Login to place an order with LifeCorp!</p>
+			<p>Please, login to continue on with LifeCorp!</p>
 		</div>
 	</div>
 	<div class="container">

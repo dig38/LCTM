@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Product;
-import modelcontroller.productMC;
+import modelcontroller.ProductMC;
 
 /**
  * SERVLET implementation class Order
@@ -39,19 +39,18 @@ public class Orders extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		Product pro = ProductMC.getOneProduct(request.getParameter("pid").toString());
+		session.setAttribute("pro", pro);
+		
 		try{
 			if((boolean)session.getAttribute("log") == true){
-				Product pro = productMC.getOneProduct(request.getParameter("pid").toString());
-				session.setAttribute("pro", pro);
-
 				getServletContext().getRequestDispatcher("/order.jsp").forward(request, response);
-			}else
-				session.setAttribute("loc", "order");
-				
+			}else{
+				session.setAttribute("loc", "/order.jsp");
 				getServletContext().getRequestDispatcher("/logon.jsp").forward(request, response);
+			}
 		}catch (NullPointerException e){
-			session.setAttribute("loc", "order");
-			
+			session.setAttribute("loc", "/order.jsp");
 			getServletContext().getRequestDispatcher("/logon.jsp").forward(request, response);
 		}
 		

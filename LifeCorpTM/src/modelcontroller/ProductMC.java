@@ -1,12 +1,14 @@
 package modelcontroller;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
 import model.Product;
 import mytools.DBUtil;
 
-public class productMC {
+public class ProductMC {
 	public static List<Product> getAllProducts(){
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		List<Product> ProductList = null;
@@ -41,7 +43,8 @@ public class productMC {
 		}finally{
 			em.close();
 		}
-	}//END getOne	
+	}//END getOne
+	
 }//END clas productMC
 
 

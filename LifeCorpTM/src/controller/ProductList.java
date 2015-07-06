@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 //import javax.servlet.http.HttpSession;
 
 import model.Product;
-import modelcontroller.productMC;
+import modelcontroller.ProductMC;
 /**
  * SERVLET implementation class CustomerList
  */
@@ -38,15 +38,15 @@ public class ProductList extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Product> proList = productMC.getAllProducts();
+		List<Product> proList = ProductMC.getAllProducts();
 		request.setAttribute("proList", proList);
 		//HttpSession session = request.getSession();
-		/*//Prints a list of our product's names to the console.
-		for (Product iterater : proList){
-			System.out.println(iterater.getProductName());
-		}
-		*/
-		getServletContext().getRequestDispatcher("/productList.jsp").forward(request, response);
+				/*//Prints a list of our product's names to the console.
+				for (Product iterater : proList){
+					System.out.println(iterater.getProductName());
+				}
+				*/
+		getServletContext().getRequestDispatcher("/productlist.jsp").forward(request, response);
 	}
 
 }
