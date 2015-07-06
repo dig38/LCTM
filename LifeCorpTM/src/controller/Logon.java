@@ -1,14 +1,13 @@
 package controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import javax.servlet.RequestDispatcher;
 import model.Customer;
 import modelcontroller.CustomerMC;
 
@@ -39,39 +38,41 @@ public class Logon extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		session.setAttribute("log", true);
 		String loc = (String)session.getAttribute("loc");
 		request.setAttribute("message", null);
-		Customer c = getCustomer(request); 
-		try{
-			if( areTheyACustomer(c) == true ){
+		
+		try {
+			//get customer
+			Customer c = CustomerMC.getOneCustomer(request.getParameter("email"),  request.getParameter("password"));			
+			
+			// If they exist send them to index or their location. Otherwise send them back to logon.
+			if( customerExists(c) == true ){
+				session.setAttribute("log", true);
 				session.setAttribute("cus", c);
-				if(loc != null)
-					getServletContext().getRequestDispatcher(loc.toString()).forward(request, response);
-				else
-					getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+			
+				RequestDispatcher reqdis = loc == null 
+						? getServletContext().getRequestDispatcher("/index.jsp") 
+						: getServletContext().getRequestDispatcher(loc);
+				
+				reqdis.forward(request, response);
+				
+			}else{
+				//make sure log is false and pass a message back from this request
+				session.setAttribute("log", false);
+				request.setAttribute("message", "Your Email/Password combination is incorect.");
+				
+				getServletContext().getRequestDispatcher("/logon.jsp").forward(request, response);
 			}
-		}catch (Exception e){
-			//System.out.println(e);
-			request.setAttribute("message", "Your Email/Password combination is incorect.");
-			getServletContext().getRequestDispatcher("/logon.jsp").forward(request, response);
+		}
+		catch (Exception e){	
 		}
 	}
 	
-	//Maybe change to pass email password instead of request
-	protected Customer getCustomer(HttpServletRequest request){
-		String cemail = request.getParameter("email");
-		String cpass = request.getParameter("password");
-		Customer c = CustomerMC.getOneCustomer(cemail, cpass);
-		return c;
-	}
-	
-	protected boolean areTheyACustomer(Customer c){
-		if (c.getCustomerId() == null)
-			return false;
-		else
-			return true;
-	}
+	//Checks that the customer id is not null.
+	protected boolean customerExists(Customer c){
+		boolean rb = (c.getCustomerId() != null) ? true : false;
+		return rb;
+	}	
 }
 
 	
